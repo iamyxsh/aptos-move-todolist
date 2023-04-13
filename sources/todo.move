@@ -1,4 +1,4 @@
-module 0x1::todolist {
+module 0xb80d8be0093f141efb04114768b8d97ce294117833208d3c22d8bcfe33f092b9::todolist {
     use aptos_framework::account;
     use std::string::{Self, String};
     use std::table::{Self, Table};
@@ -16,7 +16,7 @@ module 0x1::todolist {
         completed: bool
     }
 
-    public fun create_task(account: &signer, content: String) acquires Todolist  {
+    public entry fun create_task(account: &signer, content: String) acquires Todolist  {
         let signer_address = signer::address_of(account);
         
         if (exists<Todolist>(signer_address)) {
@@ -47,7 +47,7 @@ module 0x1::todolist {
         };
     }
 
-    public fun complete_task(account: &signer, id: u64) acquires Todolist {
+    public entry fun complete_task(account: &signer, id: u64) acquires Todolist {
         let signer_address = signer::address_of(account);
 
         assert!(exists<Todolist>(signer_address), 0);
